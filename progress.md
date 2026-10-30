@@ -3,15 +3,15 @@
 ## Status
 
 - Current phase: Phase 2 - dataset, model training, and evaluation
-- Overall progress: 35%
-- Next action: Train and compare the required classifiers
+- Overall progress: 50%
+- Next action: Implement the vision, OCR, NLP, and pipeline modules
 - Days left to 3 November 2026: 4
 
 ## Checklist
 
 - [x] Phase 0: WSL setup, dependencies, scaffold, and environment check
 - [x] Phase 1: Inspect condition values and approve category mapping
-- [ ] Phase 2: Build labelled dataset, train models, and evaluate
+- [x] Phase 2: Build labelled dataset, train models, and evaluate
 - [ ] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
 - [ ] Phase 4: Build and verify the Streamlit UI
 - [ ] Phase 5: Polish README, report outline, and demo script
@@ -42,6 +42,14 @@
 - Hold-out model comparison: Logistic Regression accuracy 0.6800, macro-F1
   0.6829; Random Forest accuracy 0.6400, macro-F1 0.6587. Logistic Regression
   was selected by macro-F1.
+- Final labelled dataset: 1,371 unique drugs across seven categories:
+  Painkiller 438, Psychiatric 197, Contraceptive 191,
+  Antihistamine / Allergy 169, Antihypertensive 152, Antibiotic 127,
+  Antidiabetic 97.
+- Saved model evaluation on 275 hold-out drugs: accuracy 0.6800 and macro-F1
+  0.6829.
+- Saved evaluation outputs: `reports/metrics.json` and
+  `reports/confusion_matrix.png`.
 
 ## Blockers / Questions for user
 
@@ -57,3 +65,5 @@
   mapping and purity rules.
 - 2026-10-30: Trained both required classifiers with a unique-drug hold-out
   split and saved the Logistic Regression pipeline as the best model.
+- 2026-10-30: Evaluated the saved pipeline and generated per-class metrics and
+  a confusion matrix.
