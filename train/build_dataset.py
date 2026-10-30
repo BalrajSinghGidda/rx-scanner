@@ -77,7 +77,14 @@ def clean_conditions(frame: pd.DataFrame) -> pd.DataFrame:
     condition = cleaned["condition"].astype(str).str.strip()
     junk = condition.str.contains("users found this comment helpful", case=False)
     cleaned = cleaned.loc[~junk].copy()
-    cleaned["condition"] = condition.loc[cleaned.index].replace(
+    cleaned["condition"] = condition.loc[cleaned.index]
+    return cleaned
+
+
+def normalize_conditions(frame: pd.DataFrame) -> pd.DataFrame:
+    """Normalize truncated condition labels for category mapping."""
+    normalized = frame.copy()
+    normalized["condition"] = normalized["condition"].replace(
         {
             "ibromyalgia": "Fibromyalgia",
             "Bipolar Disorde": "Bipolar Disorder",
@@ -90,7 +97,7 @@ def clean_conditions(frame: pd.DataFrame) -> pd.DataFrame:
             "Post Traumatic Stress Disorde": "Post Traumatic Stress Disorder",
         }
     )
-    return cleaned
+    return normalized
 
 
 def save_condition_counts(frame: pd.DataFrame) -> pd.DataFrame:
@@ -109,7 +116,8 @@ def save_condition_counts(frame: pd.DataFrame) -> pd.DataFrame:
 
 def build_labelled_dataset(frame: pd.DataFrame) -> pd.DataFrame:
     """Assign pure drug-level category labels and filter small categories."""
-    mapped = frame.assign(category=frame["condition"].map(CONDITION_TO_CATEGORY))
+    normalized = normalize_conditions(frame)
+    mapped = normalized.assign(category=normalized["condition"].map(CONDITION_TO_CATEGORY))
     mapped = mapped.dropna(subset=["category"])
     category_counts = mapped.groupby(["drugName", "category"]).size()
     drug_totals = category_counts.groupby(level="drugName").sum()
