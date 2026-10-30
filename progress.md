@@ -24,6 +24,10 @@
   added phase by phase so each change can be tested and explained.
 - 2026-10-30: Phase 1 will first preserve the real top-100 condition counts
   before any condition-to-category mapping is applied.
+- 2026-10-30: Approved seven-category mapping: Painkiller, Antibiotic,
+  Antihistamine / Allergy, Antihypertensive, Antidiabetic, Psychiatric, and
+  Contraceptive. Normalize truncated dataset labels ending in `Disorde` to
+  `Disorder` when defining the mapping; skip ambiguous or unsupported labels.
 
 ## Results
 
@@ -33,10 +37,12 @@
 
 ## Blockers / Questions for user
 
-- Awaiting approval of the proposed condition-to-category mapping before
-  completing dataset construction.
+- Mapping approved with the `Disorde` to `Disorder` normalization noted above;
+  dataset construction is the next phase.
 
 ## Log
 
 - 2026-10-30: Added the initial scaffold and verified the development environment.
 - 2026-10-30: Loaded both raw review files and added condition exploration.
+- 2026-10-30: Reviewed the top-100 condition list and approved the category
+  mapping with the spelling normalization for truncated `Disorde` labels.
