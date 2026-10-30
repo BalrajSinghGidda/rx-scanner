@@ -2,14 +2,14 @@
 
 ## Status
 
-- Current phase: Phase 0 - scaffold and environment check
-- Overall progress: 10%
-- Next action: Begin Phase 1 data exploration after approval
+- Current phase: Phase 1 - data exploration
+- Overall progress: 20%
+- Next action: Approve or edit the proposed condition-to-category mapping
 - Days left to 3 November 2026: 4
 
 ## Checklist
 
-- [ ] Phase 0: WSL setup, dependencies, scaffold, and environment check
+- [x] Phase 0: WSL setup, dependencies, scaffold, and environment check
 - [ ] Phase 1: Inspect condition values and approve category mapping
 - [ ] Phase 2: Build labelled dataset, train models, and evaluate
 - [ ] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
@@ -22,16 +22,21 @@
   `opencv-python-headless` as required by the project specification.
 - 2026-10-30: Keep the initial scaffold minimal; implementation modules will be
   added phase by phase so each change can be tested and explained.
+- 2026-10-30: Phase 1 will first preserve the real top-100 condition counts
+  before any condition-to-category mapping is applied.
 
 ## Results
 
 - Environment checks passed: Python 3.14.4, Tesseract 5.5.0, required Python
   imports, and NLTK English stop-words.
+- Phase 1 condition counts will be recorded in `reports/condition_counts.csv`.
 
 ## Blockers / Questions for user
 
-- None.
+- Awaiting approval of the proposed condition-to-category mapping before
+  completing dataset construction.
 
 ## Log
 
 - 2026-10-30: Added the initial scaffold and verified the development environment.
+- 2026-10-30: Loaded both raw review files and added condition exploration.
