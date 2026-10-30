@@ -1,0 +1,59 @@
+# ---------- Secrets / credentials (NEVER commit these) ----------
+kaggle.json
+.kaggle/
+.env
+.env.*
+.streamlit/secrets.toml
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Virtual environments ----------
+.venv/
+venv/
+env/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- Data ----------
+# Raw dataset is ~100 MB: download it with the Kaggle CLI instead of committing it
+data/raw/
+# Processed labels (data/processed/drug_categories.csv) are small, so they ARE tracked.
+# Test images in data/samples/ are tracked (own photos / mock prescriptions only).
+
+# ---------- Models ----------
+# models/model.joblib is tracked so the app runs right after cloning.
+# If it ever grows beyond ~50 MB, uncomment the next line and rebuild with train_model.py
+# models/*.joblib
+
+# ---------- Reports ----------
+# Figures and metrics.json in reports/ are tracked (needed for the report).
+
+# ---------- Streamlit ----------
+.streamlit/cache/
+
+# ---------- Editors / IDEs ----------
+.vscode/
+.idea/
+*.swp
+
+# ---------- OS junk ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+# WSL creates these when files are copied from Windows
+*:Zone.Identifier
+
+# ---------- Logs / temp ----------
+*.log
+tmp/
