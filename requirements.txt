@@ -1,0 +1,13 @@
+opencv-python-headless
+pytesseract
+streamlit
+rapidfuzz
+scikit-learn
+pandas
+numpy
+joblib
+nltk
+matplotlib
+seaborn
+pillow
+pytest
