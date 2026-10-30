@@ -2,15 +2,15 @@
 
 ## Status
 
-- Current phase: Phase 1 - data exploration
-- Overall progress: 20%
-- Next action: Approve or edit the proposed condition-to-category mapping
+- Current phase: Phase 2 - dataset, model training, and evaluation
+- Overall progress: 35%
+- Next action: Train and compare the required classifiers
 - Days left to 3 November 2026: 4
 
 ## Checklist
 
 - [x] Phase 0: WSL setup, dependencies, scaffold, and environment check
-- [ ] Phase 1: Inspect condition values and approve category mapping
+- [x] Phase 1: Inspect condition values and approve category mapping
 - [ ] Phase 2: Build labelled dataset, train models, and evaluate
 - [ ] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
 - [ ] Phase 4: Build and verify the Streamlit UI
@@ -28,17 +28,19 @@
   Antihistamine / Allergy, Antihypertensive, Antidiabetic, Psychiatric, and
   Contraceptive. Normalize truncated dataset labels ending in `Disorde` to
   `Disorder` when defining the mapping; skip ambiguous or unsupported labels.
+- 2026-10-30: Apply a 70% per-drug label-purity threshold and retain only
+  categories with at least 20 unique drugs, as required by the specification.
 
 ## Results
 
 - Environment checks passed: Python 3.14.4, Tesseract 5.5.0, required Python
   imports, and NLTK English stop-words.
 - Phase 1 condition counts will be recorded in `reports/condition_counts.csv`.
+- Phase 2 labelled data will be saved to `data/processed/drug_categories.csv`.
 
 ## Blockers / Questions for user
 
-- Mapping approved with the `Disorde` to `Disorder` normalization noted above;
-  dataset construction is the next phase.
+- None.
 
 ## Log
 
@@ -46,3 +48,5 @@
 - 2026-10-30: Loaded both raw review files and added condition exploration.
 - 2026-10-30: Reviewed the top-100 condition list and approved the category
   mapping with the spelling normalization for truncated `Disorde` labels.
+- 2026-10-30: Built the first filtered drug-category dataset using the approved
+  mapping and purity rules.
