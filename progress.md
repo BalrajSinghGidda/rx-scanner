@@ -2,9 +2,9 @@
 
 ## Status
 
-- Current phase: Phase 2 - dataset, model training, and evaluation
-- Overall progress: 50%
-- Next action: Implement the vision, OCR, NLP, and pipeline modules
+- Current phase: Phase 3 - vision, OCR, NLP, and analysis pipeline
+- Overall progress: 65%
+- Next action: Build the Streamlit UI
 - Days left to 3 November 2026: 4
 
 ## Checklist
@@ -12,7 +12,7 @@
 - [x] Phase 0: WSL setup, dependencies, scaffold, and environment check
 - [x] Phase 1: Inspect condition values and approve category mapping
 - [x] Phase 2: Build labelled dataset, train models, and evaluate
-- [ ] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
+- [x] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
 - [ ] Phase 4: Build and verify the Streamlit UI
 - [ ] Phase 5: Polish README, report outline, and demo script
 
@@ -50,6 +50,11 @@
   0.6829.
 - Saved evaluation outputs: `reports/metrics.json` and
   `reports/confusion_matrix.png`.
+- Phase 3 includes three clearly labelled synthetic samples because the samples
+  directory had no user-provided images. OCR and prediction smoke tests:
+  `synthetic_amoxicillin.png` -> Antibiotic (0.515),
+  `synthetic_aspirin.png` -> Painkiller (0.730), and
+  `synthetic_metformin.png` -> Antidiabetic (0.657).
 
 ## Blockers / Questions for user
 
@@ -67,3 +72,5 @@
   split and saved the Logistic Regression pipeline as the best model.
 - 2026-10-30: Evaluated the saved pipeline and generated per-class metrics and
   a confusion matrix.
+- 2026-10-30: Implemented OpenCV vision, Tesseract OCR, NLP matching, offline
+  prediction, the plain-Python analysis pipeline, CLI, and focused tests.
