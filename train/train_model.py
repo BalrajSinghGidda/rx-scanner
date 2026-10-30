@@ -97,11 +97,11 @@ def evaluate_model(model: Pipeline, test: pd.DataFrame) -> dict[str, float]:
     }
 
 
-def save_best_model(model: Pipeline) -> None:
+def save_best_model(model: Pipeline, dataset: pd.DataFrame) -> None:
     """Save the complete inference pipeline and its drug vocabulary."""
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, MODEL_PATH)
-    vocabulary = sorted(model.named_steps["tfidf"].get_feature_names_out())
+    vocabulary = sorted(dataset["drugName"].drop_duplicates().tolist())
     VOCAB_PATH.write_text(json.dumps(vocabulary, indent=2) + "\n")
 
 
@@ -121,7 +121,7 @@ def main() -> None:
         )
 
     best_name = max(results, key=lambda name: results[name]["macro_f1"])
-    save_best_model(trained[best_name])
+    save_best_model(trained[best_name], dataset)
     print(f"Selected {best_name}")
     print(f"Saved {MODEL_PATH} and {VOCAB_PATH}")
 
