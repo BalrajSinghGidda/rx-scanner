@@ -37,6 +37,11 @@
   imports, and NLTK English stop-words.
 - Phase 1 condition counts will be recorded in `reports/condition_counts.csv`.
 - Phase 2 labelled data will be saved to `data/processed/drug_categories.csv`.
+- The best trained inference pipeline will be saved to `models/model.joblib`,
+  with its n-gram vocabulary in `models/vocab.json`.
+- Hold-out model comparison: Logistic Regression accuracy 0.6800, macro-F1
+  0.6829; Random Forest accuracy 0.6400, macro-F1 0.6587. Logistic Regression
+  was selected by macro-F1.
 
 ## Blockers / Questions for user
 
@@ -50,3 +55,5 @@
   mapping with the spelling normalization for truncated `Disorde` labels.
 - 2026-10-30: Built the first filtered drug-category dataset using the approved
   mapping and purity rules.
+- 2026-10-30: Trained both required classifiers with a unique-drug hold-out
+  split and saved the Logistic Regression pipeline as the best model.
