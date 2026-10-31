@@ -2,10 +2,10 @@
 
 ## Status
 
-- Current phase: Phase 4 - Streamlit UI
-- Overall progress: 80%
-- Next action: Polish documentation and prepare the report/demo materials
-- Days left to 3 November 2026: 4
+- Current phase: Phase 5 - Polish and documentation
+- Overall progress: 85%
+- Next action: Add the report outline and demo script
+- Days left to 3 November 2026: 3
 
 ## Checklist
 
@@ -30,6 +30,8 @@
   `Disorder` when defining the mapping; skip ambiguous or unsupported labels.
 - 2026-10-30: Apply a 70% per-drug label-purity threshold and retain only
   categories with at least 20 unique drugs, as required by the specification.
+- 2026-10-31: Replaced the README stub with setup, usage, measured results,
+  project structure, and limitations.
 
 ## Results
 
@@ -60,6 +62,8 @@
   low-confidence warnings.
 - Added `pytest.ini` so test imports resolve from the repository root even when
   the pytest launcher is not the virtualenv's executable.
+- README now documents reproducible WSL setup, training/evaluation commands,
+  measured results, limitations, and the final project structure.
 
 ## Blockers / Questions for user
 
@@ -67,6 +71,8 @@
 
 ## Log
 
+- 2026-10-31: Replaced the README stub with complete setup, usage, results,
+  and limitations documentation.
 - 2026-10-30: Added the initial scaffold and verified the development environment.
 - 2026-10-30: Loaded both raw review files and added condition exploration.
 - 2026-10-30: Reviewed the top-100 condition list and approved the category
