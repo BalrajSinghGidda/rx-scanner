@@ -3,6 +3,7 @@ import numpy as np
 
 from src.nlp import clean_text, match_brands, match_drugs, tokenize
 from src.pipeline import analyze
+from src.online_lookup import OnlineLookupResult
 from src.vision import preprocess
 
 
@@ -40,3 +41,8 @@ def test_pipeline_returns_structured_result() -> None:
     result = analyze(image)
     assert result.vision.gray.shape == image.shape[:2]
     assert isinstance(result.raw_lines, list)
+
+
+def test_online_lookup_result_is_source_attributed() -> None:
+    result = OnlineLookupResult("x", "X", ["ingredient"], "Provider", "https://example.test")
+    assert result.citation_url.startswith("https://")

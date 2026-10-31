@@ -91,6 +91,9 @@ def match_brands(text: str, path: Path = BRAND_PATH) -> list[BrandIngredientMatc
     if not path.exists():
         return []
     brands = json.loads(path.read_text())
+    cache_path = path.with_name("online_reference.json")
+    if cache_path.exists():
+        brands.update(json.loads(cache_path.read_text()))
     normalized = clean_text(text)
     matches = []
     for key, details in brands.items():

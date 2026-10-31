@@ -105,3 +105,6 @@
   metformin hydrochloride, and Atorva -> atorvastatin. Category prediction now
   uses only reliable drug/ingredient evidence and does not fall back to all
   prescription prose.
+- Added an opt-in online lookup demonstration using RxNorm or openFDA. Results
+  are saved to `models/online_reference.json`, reused offline on future scans,
+  and displayed with a provider citation in the UI footer.

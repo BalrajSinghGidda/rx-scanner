@@ -8,6 +8,7 @@ import streamlit as st
 from PIL import Image
 
 from src.pipeline import AnalysisResult, analyze
+from src.online_lookup import lookup_openfda, lookup_rxnorm, save_result
 
 SAMPLES_DIR = Path("data/samples")
 
@@ -83,6 +84,16 @@ def main() -> None:
         sample_names = ["None"] + [path.name for path in samples]
         selected = st.selectbox("Use sample image", sample_names)
         show_boxes = st.checkbox("Show bounding boxes", value=True)
+        st.divider()
+        st.subheader("Optional online lookup")
+        allow_online = st.checkbox(
+            "Allow an approved API query",
+            value=False,
+            help="Disabled by default; inference remains offline unless enabled.",
+        )
+        lookup_name = st.text_input("Brand name to query", placeholder="e.g. Telvas")
+        provider = st.selectbox("Provider", ["RxNorm", "openFDA"])
+        lookup_clicked = st.button("Query and cache result", disabled=not allow_online)
 
     image_bgr: np.ndarray | None = None
     display_image: Image.Image | None = None
@@ -122,6 +133,26 @@ def main() -> None:
         channels = "BGR" if show_boxes else "GRAY"
         st.image(processed_image, channels=channels, use_container_width=True)
     show_results(result)
+    if allow_online and lookup_clicked and lookup_name.strip():
+        lookup = (
+            lookup_rxnorm(lookup_name.strip())
+            if provider == "RxNorm"
+            else lookup_openfda(lookup_name.strip())
+        )
+        if lookup is None:
+            st.warning("No ingredient result was returned by the selected provider.")
+        else:
+            save_result(lookup)
+            st.success(
+                f"Cached {lookup.display_name}: {', '.join(lookup.ingredients)}"
+            )
+            st.caption(
+                f"Source citation: [{lookup.provider}]({lookup.citation_url})"
+            )
+    st.caption(
+        "Educational demonstration. Local results are preferred; online lookup "
+        "is user-approved and cached with its source citation."
+    )
 
 
 if __name__ == "__main__":
