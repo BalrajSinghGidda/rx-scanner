@@ -3,8 +3,8 @@
 ## Status
 
 - Current phase: Phase 5 - Polish and documentation
-- Overall progress: 85%
-- Next action: Add the report outline and demo script
+- Overall progress: 100%
+- Next action: Rehearse the three-minute demonstration
 - Days left to 3 November 2026: 3
 
 ## Checklist
@@ -14,7 +14,7 @@
 - [x] Phase 2: Build labelled dataset, train models, and evaluate
 - [x] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
 - [x] Phase 4: Build and verify the Streamlit UI
-- [ ] Phase 5: Polish README, report outline, and demo script
+- [x] Phase 5: Polish README, report outline, and demo script
 
 ## Decisions
 
@@ -34,6 +34,8 @@
   project structure, and limitations.
 - 2026-10-31: Added the report outline with the measured model comparison,
   dataset counts, smoke-test results, limitations, and future work.
+- 2026-10-31: Added the three-minute demonstration script with fallback steps
+  and the measured synthetic sample results.
 
 ## Results
 
@@ -67,6 +69,8 @@
 - README now documents reproducible WSL setup, training/evaluation commands,
   measured results, limitations, and the final project structure.
 - Report outline added at `docs/report_outline.md` with only computed metrics.
+- Demo walkthrough added at `docs/demo_script.md` with exact WSL and Streamlit
+  steps.
 
 ## Blockers / Questions for user
 
@@ -74,6 +78,8 @@
 
 ## Log
 
+- 2026-10-31: Completed Phase 5 documentation with `docs/demo_script.md`;
+  README, report outline, and demo instructions are now committed.
 - 2026-10-31: Added `docs/report_outline.md` with methodology, real results,
   failure analysis, safety limits, and future work.
 - 2026-10-31: Replaced the README stub with complete setup, usage, results,
