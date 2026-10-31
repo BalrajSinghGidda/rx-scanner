@@ -81,3 +81,11 @@
   prediction, the plain-Python analysis pipeline, CLI, and focused tests.
 - 2026-10-31: Implemented the Streamlit dashboard around the Phase 3 pipeline.
 - 2026-10-31: Fixed pytest module discovery for direct `pytest -q` execution.
+- 2026-10-31: Started OCR experiments on a low-resolution table prescription;
+  line removal, stronger upscaling, whole-image quality selection, and
+  filtering of prescription boilerplate tokens were added on the test branch.
+- On the attached prescription smoke test, OCR now recovers medicine-name
+  lines such as ABCIXIMAB, VOMILAST, DOXYLAMINE, ZOCLAR, CLARITHROMYCIN,
+  GESTAKIND, and ISOXSUPRINE; the names remain imperfect because the source
+  image is only 470x335 pixels and several names are absent from the model
+  vocabulary.

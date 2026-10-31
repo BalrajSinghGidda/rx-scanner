@@ -7,6 +7,23 @@ from nltk.corpus import stopwords
 from rapidfuzz import fuzz, process
 
 STOP_WORDS = set(stopwords.words("english"))
+NON_DRUG_TOKENS = {
+    "acid",
+    "after",
+    "cap",
+    "chief",
+    "cot",
+    "days",
+    "dosage",
+    "duration",
+    "food",
+    "morning",
+    "name",
+    "night",
+    "patient",
+    "tab",
+    "tot",
+}
 
 
 def clean_text(text: str) -> str:
@@ -31,6 +48,8 @@ def match_drugs(
     choices = [item for item in vocab if item and item.strip()]
     for token in tokens:
         if not any(character.isalpha() for character in token):
+            continue
+        if token in NON_DRUG_TOKENS:
             continue
         result = process.extractOne(token, choices, scorer=fuzz.WRatio)
         if result is not None:
