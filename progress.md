@@ -84,6 +84,8 @@
   README, report outline, and demo instructions are now committed.
 - 2026-10-31: Added the fresh-clone bootstrap script and documented the
   two-prerequisite setup: create `.venv` and configure Kaggle CLI.
+- 2026-10-31: Updated repository instructions so `setup.sh` is the canonical
+  post-clone setup path.
 - 2026-10-31: Added `docs/report_outline.md` with methodology, real results,
   failure analysis, safety limits, and future work.
 - 2026-10-31: Replaced the README stub with complete setup, usage, results,

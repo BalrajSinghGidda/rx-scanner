@@ -17,7 +17,11 @@ A Streamlit app for the TR-102 training project: the user uploads a photo of a p
 ## Commands
 
 ```bash
-# setup
+# fresh clone setup (after creating .venv, activating it, installing Tesseract,
+# and configuring the Kaggle CLI)
+./setup.sh
+
+# manual/repeatable individual steps
 pip install -r requirements.txt
 
 # data + model

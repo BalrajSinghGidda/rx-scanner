@@ -79,11 +79,9 @@ mkdir -p ~/rx-scanner && cd ~/rx-scanner
 python3 -m venv .venv
 source .venv/bin/activate
 
-pip install opencv-python-headless pytesseract streamlit rapidfuzz \
-            scikit-learn pandas numpy joblib nltk matplotlib seaborn pillow kaggle
-
-python -c "import nltk; nltk.download('stopwords')"
-tesseract --version        # sanity check
+sudo apt install -y tesseract-ocr
+# Configure the Kaggle CLI with your account, then run:
+./setup.sh
 ```
 
 Run the app:
