@@ -2,9 +2,9 @@
 
 ## Status
 
-- Current phase: Phase 3 - vision, OCR, NLP, and analysis pipeline
-- Overall progress: 65%
-- Next action: Build the Streamlit UI
+- Current phase: Phase 4 - Streamlit UI
+- Overall progress: 80%
+- Next action: Polish documentation and prepare the report/demo materials
 - Days left to 3 November 2026: 4
 
 ## Checklist
@@ -13,7 +13,7 @@
 - [x] Phase 1: Inspect condition values and approve category mapping
 - [x] Phase 2: Build labelled dataset, train models, and evaluate
 - [x] Phase 3: Implement vision, OCR, NLP, and analysis pipeline
-- [ ] Phase 4: Build and verify the Streamlit UI
+- [x] Phase 4: Build and verify the Streamlit UI
 - [ ] Phase 5: Polish README, report outline, and demo script
 
 ## Decisions
@@ -55,6 +55,9 @@
   `synthetic_amoxicillin.png` -> Antibiotic (0.515),
   `synthetic_aspirin.png` -> Painkiller (0.730), and
   `synthetic_metformin.png` -> Antidiabetic (0.657).
+- Phase 4 UI implemented in `app.py` with upload/sample selection, permanent
+  educational-use banner, side-by-side image display, result cards, and
+  low-confidence warnings.
 
 ## Blockers / Questions for user
 
@@ -74,3 +77,4 @@
   a confusion matrix.
 - 2026-10-30: Implemented OpenCV vision, Tesseract OCR, NLP matching, offline
   prediction, the plain-Python analysis pipeline, CLI, and focused tests.
+- 2026-10-31: Implemented the Streamlit dashboard around the Phase 3 pipeline.
