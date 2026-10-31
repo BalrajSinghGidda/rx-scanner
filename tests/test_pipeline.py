@@ -11,6 +11,7 @@ def test_nlp_cleans_tokenizes_and_matches() -> None:
     assert tokenize("The amoxicillin 10mg") == ["amoxicillin", "10mg"]
     result = match_drugs(["amoxiciliin"], ["amoxicillin"])
     assert result[0]["matched"] == "amoxicillin"
+    assert match_drugs(["tab", "acid"], ["Lortab", "Acetohydroxamic acid"]) == []
 
 
 def test_vision_returns_sorted_boxes() -> None:
