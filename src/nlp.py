@@ -1,12 +1,15 @@
 """OCR text cleaning and fuzzy drug-name matching."""
 
+import json
 import re
+from dataclasses import dataclass
 from pathlib import Path
 
 from nltk.corpus import stopwords
 from rapidfuzz import fuzz, process
 
 STOP_WORDS = set(stopwords.words("english"))
+BRAND_PATH = Path("models/brand_ingredients.json")
 NON_DRUG_TOKENS = {
     "acid",
     "after",
@@ -72,6 +75,32 @@ def match_drugs(
                 matches.append(
                     {"raw": token, "matched": matched.strip(), "score": round(score)}
                 )
+    return matches
+
+
+@dataclass(frozen=True)
+class BrandIngredientMatch:
+    """A recognized brand and its known active ingredients."""
+
+    brand: str
+    ingredients: list[str]
+
+
+def match_brands(text: str, path: Path = BRAND_PATH) -> list[BrandIngredientMatch]:
+    """Find known brand names in cleaned OCR text."""
+    if not path.exists():
+        return []
+    brands = json.loads(path.read_text())
+    normalized = clean_text(text)
+    matches = []
+    for key, details in brands.items():
+        if re.search(rf"\b{re.escape(key)}\b", normalized):
+            matches.append(
+                BrandIngredientMatch(
+                    brand=details["display_name"],
+                    ingredients=details["ingredients"],
+                )
+            )
     return matches
 
 

@@ -1,12 +1,19 @@
 """End-to-end image analysis pipeline and command-line interface."""
 
 import argparse
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import cv2
 
-from src.nlp import clean_text, load_vocabulary, match_drugs, tokenize
+from src.nlp import (
+    BrandIngredientMatch,
+    clean_text,
+    load_vocabulary,
+    match_brands,
+    match_drugs,
+    tokenize,
+)
 from src.ocr import extract_text
 from src.predict import classify
 from src.vision import VisionResult, preprocess
@@ -23,6 +30,8 @@ class AnalysisResult:
     category: str | None
     confidence: float | None
     warnings: list[str]
+    ingredients: list[str] = field(default_factory=list)
+    brands: list[BrandIngredientMatch] = field(default_factory=list)
 
 
 def analyze(img_bgr) -> AnalysisResult:
@@ -39,9 +48,22 @@ def analyze(img_bgr) -> AnalysisResult:
     matches = [
         match
         for match in match_drugs(tokens, load_vocabulary(), threshold=85)
-        if len(match["raw"]) >= 7
+        if len(match["raw"]) >= 6
     ]
-    prediction_text = " ".join(match["matched"] for match in matches) or cleaned_text
+    brands = match_brands(cleaned_text)
+    brand_tokens = {
+        token
+        for brand in brands
+        for token in tokenize(brand.brand)
+        if len(token) >= 6
+    }
+    matches = [match for match in matches if match["raw"] not in brand_tokens]
+    ingredients = sorted(
+        {ingredient for brand in brands for ingredient in brand.ingredients}
+    )
+    prediction_text = " ".join(
+        [match["matched"] for match in matches] + ingredients
+    )
     category = confidence = None
     if prediction_text:
         category, confidence = classify(prediction_text)
@@ -57,6 +79,8 @@ def analyze(img_bgr) -> AnalysisResult:
         category,
         confidence,
         warnings,
+        ingredients,
+        brands,
     )
 
 
@@ -72,6 +96,9 @@ def main() -> None:
     print("Matched drugs:")
     for match in result.matches:
         print(f"- {match['raw']} -> {match['matched']} ({match['score']})")
+    print("Known active ingredients:")
+    for brand in result.brands:
+        print(f"- {brand.brand}: {', '.join(brand.ingredients)}")
     print(f"Category: {result.category or '(none)'}")
     print(
         f"Confidence: {result.confidence:.3f}"

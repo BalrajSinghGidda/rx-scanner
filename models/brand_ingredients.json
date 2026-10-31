@@ -1,0 +1,14 @@
+{
+  "telvas": {
+    "display_name": "Telvas",
+    "ingredients": ["telmisartan"]
+  },
+  "glycomet gp": {
+    "display_name": "Glycomet GP",
+    "ingredients": ["glimepiride", "metformin hydrochloride"]
+  },
+  "atorva": {
+    "display_name": "Atorva",
+    "ingredients": ["atorvastatin"]
+  }
+}

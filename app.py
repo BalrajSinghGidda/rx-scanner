@@ -57,6 +57,11 @@ def show_results(result: AnalysisResult) -> None:
         else:
             st.info("A category could not be predicted.")
 
+    if result.brands:
+        st.subheader("Known active ingredient(s)")
+        for brand in result.brands:
+            st.write(f"**{brand.brand}:** {', '.join(brand.ingredients)}")
+
     for warning in result.warnings:
         st.warning(warning)
 
