@@ -13,15 +13,25 @@ NON_DRUG_TOKENS = {
     "cap",
     "chief",
     "cot",
+    "clinical",
+    "complaints",
+    "diagnosis",
     "days",
     "dosage",
     "duration",
+    "fever",
+    "findings",
     "food",
+    "headache",
+    "malaria",
     "morning",
     "name",
     "night",
     "patient",
+    "prescription",
+    "sample",
     "tab",
+    "test",
     "tot",
 }
 
@@ -65,4 +75,8 @@ def load_vocabulary(path: Path = Path("models/vocab.json")) -> list[str]:
     """Load the drug vocabulary generated during training."""
     import json
 
-    return json.loads(path.read_text())
+    vocabulary = json.loads(path.read_text())
+    rxnorm_path = path.with_name("rxnorm_vocab.json")
+    if rxnorm_path.exists():
+        vocabulary.extend(json.loads(rxnorm_path.read_text()))
+    return sorted(set(vocabulary))
