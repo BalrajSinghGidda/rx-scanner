@@ -89,3 +89,10 @@
   GESTAKIND, and ISOXSUPRINE; the names remain imperfect because the source
   image is only 470x335 pixels and several names are absent from the model
   vocabulary.
+- RxNorm ingredient names can be downloaded during setup with
+  `python -m train.build_vocabulary`; the generated vocabulary is used offline
+  alongside the training vocabulary.
+- The pipeline applies a conservative decision gate: only alphabetic tokens of
+  at least seven characters and fuzzy scores of 85 or higher can influence the
+  category prediction, reducing matches on words such as `tab`, `fever`, and
+  `malaria`.

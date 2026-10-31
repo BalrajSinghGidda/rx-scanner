@@ -36,7 +36,11 @@ def analyze(img_bgr) -> AnalysisResult:
     raw_lines = extract_text(vision.gray, vision.boxes)
     cleaned_text = clean_text(" ".join(raw_lines))
     tokens = tokenize(cleaned_text)
-    matches = match_drugs(tokens, load_vocabulary())
+    matches = [
+        match
+        for match in match_drugs(tokens, load_vocabulary(), threshold=85)
+        if len(match["raw"]) >= 7
+    ]
     prediction_text = " ".join(match["matched"] for match in matches) or cleaned_text
     category = confidence = None
     if prediction_text:
