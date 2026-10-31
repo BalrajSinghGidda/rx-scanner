@@ -30,6 +30,8 @@
   `Disorder` when defining the mapping; skip ambiguous or unsupported labels.
 - 2026-10-30: Apply a 70% per-drug label-purity threshold and retain only
   categories with at least 20 unique drugs, as required by the specification.
+- 2026-10-31: Treat verified brand-resolved active ingredients as matched drugs
+  with score 100 and provenance, while retaining the separate brand summary.
 
 ## Results
 
@@ -67,6 +69,8 @@
 
 ## Log
 
+- 2026-10-31 15:47 UTC: Included known active ingredients in matched-drug
+  results and added a regression test; 7 tests passed.
 - 2026-10-30: Added the initial scaffold and verified the development environment.
 - 2026-10-30: Loaded both raw review files and added condition exploration.
 - 2026-10-30: Reviewed the top-100 condition list and approved the category
@@ -108,3 +112,6 @@
 - Added an opt-in online lookup demonstration using RxNorm or openFDA. Results
   are saved to `models/online_reference.json`, reused offline on future scans,
   and displayed with a provider citation in the UI footer.
+- Known active ingredients resolved from recognized brands are now also included
+  in the matched-drug results with explicit provenance.
+- Focused test suite after the ingredient-match change: 7 passed.

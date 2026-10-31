@@ -42,9 +42,14 @@ def show_results(result: AnalysisResult) -> None:
         st.subheader("Matched drug(s)")
         if result.matches:
             for match in result.matches:
+                source = (
+                    f"; source: {match['brand']}"
+                    if match.get("source") == "known active ingredient"
+                    else ""
+                )
                 st.write(
                     f"`{match['raw']}` → **{match['matched']}** "
-                    f"(score {match['score']})"
+                    f"(score {match['score']}{source})"
                 )
         else:
             st.write("No drug names matched the vocabulary.")

@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 from src.nlp import clean_text, match_brands, match_drugs, tokenize
-from src.pipeline import analyze
+from src.pipeline import analyze, merge_ingredient_matches
 from src.online_lookup import OnlineLookupResult
 from src.vision import preprocess
 
@@ -14,6 +14,21 @@ def test_nlp_cleans_tokenizes_and_matches() -> None:
     assert result[0]["matched"] == "amoxicillin"
     assert match_drugs(["tab", "acid"], ["Lortab", "Acetohydroxamic acid"]) == []
     assert match_brands("Tab. Telvas 40 mg")[0].ingredients == ["telmisartan"]
+
+
+def test_known_ingredients_are_matched_drugs() -> None:
+    brands = match_brands("Telvas 40 mg Glycomet GP")
+    matches = merge_ingredient_matches(
+        [{"raw": "telmisartan", "matched": "telmisartan", "score": 92}],
+        brands,
+    )
+    assert [match["matched"] for match in matches] == [
+        "telmisartan",
+        "glimepiride",
+        "metformin hydrochloride",
+    ]
+    assert matches[1]["source"] == "known active ingredient"
+    assert matches[1]["brand"] == "Glycomet GP"
 
 
 def test_vision_returns_sorted_boxes() -> None:

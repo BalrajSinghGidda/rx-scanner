@@ -34,6 +34,29 @@ class AnalysisResult:
     brands: list[BrandIngredientMatch] = field(default_factory=list)
 
 
+def merge_ingredient_matches(
+    matches: list[dict], brands: list[BrandIngredientMatch]
+) -> list[dict]:
+    """Include known brand ingredients in the matched-drug results."""
+    merged = list(matches)
+    known_names = {match["matched"].casefold() for match in merged}
+    for brand in brands:
+        for ingredient in brand.ingredients:
+            if ingredient.casefold() in known_names:
+                continue
+            merged.append(
+                {
+                    "raw": ingredient,
+                    "matched": ingredient,
+                    "score": 100,
+                    "source": "known active ingredient",
+                    "brand": brand.brand,
+                }
+            )
+            known_names.add(ingredient.casefold())
+    return merged
+
+
 def analyze(img_bgr) -> AnalysisResult:
     """Analyze an image without requiring Streamlit."""
     warnings: list[str] = []
@@ -61,6 +84,7 @@ def analyze(img_bgr) -> AnalysisResult:
     ingredients = sorted(
         {ingredient for brand in brands for ingredient in brand.ingredients}
     )
+    matches = merge_ingredient_matches(matches, brands)
     prediction_text = " ".join(
         [match["matched"] for match in matches] + ingredients
     )
