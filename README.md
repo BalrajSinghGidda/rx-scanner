@@ -36,19 +36,24 @@ python3 -m venv .venv
 source .venv/bin/activate
 sudo apt update
 sudo apt install -y tesseract-ocr
-pip install -r requirements.txt
-python -c "import nltk; nltk.download('stopwords')"
-tesseract --version
 ```
 
-The raw Kaggle files must be present in `data/raw/`:
+Configure the Kaggle CLI using your Kaggle account, then run the one-command
+bootstrap script:
 
-```text
-data/raw/drugsComTrain_raw.csv
-data/raw/drugsComTest_raw.csv
+```bash
+./setup.sh
 ```
 
-Raw data and the virtual environment are intentionally ignored by Git.
+The script installs `requirements.txt`, downloads NLTK stop-words, verifies
+Tesseract and Kaggle CLI availability, downloads the raw dataset, rebuilds the
+processed dataset and model, evaluates it, and runs the tests. It is safe to
+run again; an existing raw dataset is not downloaded twice.
+
+The Kaggle dataset is `jessicali9530/kuc-hackathon-winter-2018`. The CLI must
+already be authenticated because credentials must never be stored in this
+repository. Raw data and the virtual environment are intentionally ignored by
+Git.
 
 ## Train and evaluate
 

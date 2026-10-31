@@ -71,6 +71,8 @@
 - Report outline added at `docs/report_outline.md` with only computed metrics.
 - Demo walkthrough added at `docs/demo_script.md` with exact WSL and Streamlit
   steps.
+- Added `setup.sh` so a fresh clone can install dependencies, fetch the Kaggle
+  data, rebuild artifacts, evaluate the model, and run tests in one command.
 
 ## Blockers / Questions for user
 
@@ -80,6 +82,8 @@
 
 - 2026-10-31: Completed Phase 5 documentation with `docs/demo_script.md`;
   README, report outline, and demo instructions are now committed.
+- 2026-10-31: Added the fresh-clone bootstrap script and documented the
+  two-prerequisite setup: create `.venv` and configure Kaggle CLI.
 - 2026-10-31: Added `docs/report_outline.md` with methodology, real results,
   failure analysis, safety limits, and future work.
 - 2026-10-31: Replaced the README stub with complete setup, usage, results,
