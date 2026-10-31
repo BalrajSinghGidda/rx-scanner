@@ -58,6 +58,8 @@
 - Phase 4 UI implemented in `app.py` with upload/sample selection, permanent
   educational-use banner, side-by-side image display, result cards, and
   low-confidence warnings.
+- Added `pytest.ini` so test imports resolve from the repository root even when
+  the pytest launcher is not the virtualenv's executable.
 
 ## Blockers / Questions for user
 
@@ -78,3 +80,4 @@
 - 2026-10-30: Implemented OpenCV vision, Tesseract OCR, NLP matching, offline
   prediction, the plain-Python analysis pipeline, CLI, and focused tests.
 - 2026-10-31: Implemented the Streamlit dashboard around the Phase 3 pipeline.
+- 2026-10-31: Fixed pytest module discovery for direct `pytest -q` execution.
