@@ -24,6 +24,15 @@ def test_vision_returns_sorted_boxes() -> None:
     assert result.boxes == sorted(result.boxes, key=lambda box: (box[1], box[0]))
 
 
+def test_vision_does_not_return_full_table_rules_as_boxes() -> None:
+    image = np.full((180, 400, 3), 255, dtype=np.uint8)
+    cv2.line(image, (10, 30), (390, 30), (0, 0, 0), 2)
+    cv2.line(image, (10, 150), (390, 150), (0, 0, 0), 2)
+    cv2.putText(image, "Telvas 40 mg", (25, 95), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+    result = preprocess(image)
+    assert all(height < 100 for _, _, _, height in result.boxes)
+
+
 def test_pipeline_returns_structured_result() -> None:
     image = np.full((120, 300, 3), 255, dtype=np.uint8)
     cv2.putText(image, "Aspirin", (15, 65), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
