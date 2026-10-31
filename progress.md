@@ -32,6 +32,8 @@
   categories with at least 20 unique drugs, as required by the specification.
 - 2026-10-31: Replaced the README stub with setup, usage, measured results,
   project structure, and limitations.
+- 2026-10-31: Added the report outline with the measured model comparison,
+  dataset counts, smoke-test results, limitations, and future work.
 
 ## Results
 
@@ -64,6 +66,7 @@
   the pytest launcher is not the virtualenv's executable.
 - README now documents reproducible WSL setup, training/evaluation commands,
   measured results, limitations, and the final project structure.
+- Report outline added at `docs/report_outline.md` with only computed metrics.
 
 ## Blockers / Questions for user
 
@@ -71,6 +74,8 @@
 
 ## Log
 
+- 2026-10-31: Added `docs/report_outline.md` with methodology, real results,
+  failure analysis, safety limits, and future work.
 - 2026-10-31: Replaced the README stub with complete setup, usage, results,
   and limitations documentation.
 - 2026-10-30: Added the initial scaffold and verified the development environment.
