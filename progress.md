@@ -100,3 +100,8 @@
   monochrome sheet, OCR now preserves the medicine rows and on the hypertension
   form it reads `Telvas`, `Glycomet`, and `Atorva` in context. Generic advice
   words are excluded from drug matching.
+- Added a small offline brand-to-active-ingredient layer for the synthetic
+  hypertension form: Telvas -> telmisartan, Glycomet GP -> glimepiride plus
+  metformin hydrochloride, and Atorva -> atorvastatin. Category prediction now
+  uses only reliable drug/ingredient evidence and does not fall back to all
+  prescription prose.
