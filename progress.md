@@ -96,3 +96,7 @@
   at least seven characters and fuzzy scores of 85 or higher can influence the
   category prediction, reducing matches on words such as `tab`, `fever`, and
   `malaria`.
+- Table-rule removal was added to vision preprocessing; on the high-resolution
+  monochrome sheet, OCR now preserves the medicine rows and on the hypertension
+  form it reads `Telvas`, `Glycomet`, and `Atorva` in context. Generic advice
+  words are excluded from drug matching.
